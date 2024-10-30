@@ -1,34 +1,34 @@
-import express, { urlencoded } from "express";
-import authRoutes from "./routes/auth.route.js";
+import express from "express";
 import { configDotenv } from "dotenv";
-import { connectDB } from "./db/connetDB.js";
 import cookieParser from "cookie-parser";
+import { connectDB } from "./db/db.js";
+
+//import routes
+
+import authRoutes from "./routes/auth.route.js";
 import userRoutes from "./routes/user.route.js";
-import { v2 as cloudinary } from "cloudinary";
+import postRoutes from "./routes/post.route.js";
+import notificationRoutes from "./routes/notification.route.js";
 
 configDotenv();
-const app = express();
-const PORT = process.env.PORT || 5000;
 
-// a lot of middleware to parse data
+const app = express();
+const PORT = process.env.PORT || 2000;
+
+//middleware
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
-//cloudinary
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
 
 //routes
 
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/post", postRoutes);
+app.use("/api/notification", notificationRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Sever is running on port ${PORT}`);
+  console.log(`SERVER ON ${PORT}`);
   connectDB();
 });

@@ -1,15 +1,15 @@
-import mongoose, { model, Schema } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 const notificationSchema = new Schema(
   {
-    from: [
+    to: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true,
       },
     ],
-    to: [
+    from: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -18,8 +18,8 @@ const notificationSchema = new Schema(
     ],
     type: {
       type: String,
-      required: true,
       enum: ["follow", "like"],
+      required: true,
     },
     read: {
       type: Boolean,

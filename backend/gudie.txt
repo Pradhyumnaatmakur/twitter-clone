@@ -1,0 +1,21 @@
+routes
+
+auth
+post
+notification
+user
+
+
+controller
+
+auth (login, signup, logout, getMe)
+post (createpost, deletePost, likeunlike, commentonposts, getall, getFollowing, getuserposts, getuserlikedposts)
+user (getuserprofile, getsuggested users, followunfollow, updateuser  )
+notification(get notification, deletenotification)
+
+models
+
+user(username, fullname, email, password, following, followers, bio, link, profileImg, coverImg, likedPosts)
+post(user, text, comments(user, text), like)
+notification(to, from, type, read)
+
